@@ -25,4 +25,5 @@ public interface User {
      * @return User's avatar
      */
     Image getIcon();
+
 }

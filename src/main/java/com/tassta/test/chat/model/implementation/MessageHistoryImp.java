@@ -5,15 +5,19 @@ import com.tassta.test.chat.model.MessageHistory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+
 
 public class MessageHistoryImp implements MessageHistory {
 
-    private List<Message> messageList = new ArrayList<>();
+    private ObservableList<Message> messageObservableList = FXCollections.observableList(new LinkedList<>());
 
     @Override
     public ObservableList<Message> getMessageList() {
-        return FXCollections.observableList(messageList);
+        return messageObservableList;
+    }
+
+    public void putMessInMessHistory(Message message) {
+        messageObservableList.add(message);
     }
 }

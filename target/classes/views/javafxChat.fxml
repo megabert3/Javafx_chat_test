@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tassta.test.chat.controllers.JavafxChatController">
+<AnchorPane prefHeight="602.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tassta.test.chat.controllers.JavafxChatController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="150.0" layoutY="39.0" prefHeight="563.0" prefWidth="1017.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0">
         <items>
@@ -20,10 +20,10 @@
                <children>
                   <TableView fx:id="contactsTabView" layoutX="22.0" layoutY="80.0" prefHeight="600.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="statusCol" prefWidth="24.0" text="C1" />
-                      <TableColumn fx:id="avatarCol" prefWidth="61.0" text="C2" />
-                        <TableColumn fx:id="nameCol" prefWidth="185.0" text="C2" />
-                        <TableColumn fx:id="newMessColl" prefWidth="30.0" text="C2" />
+                      <TableColumn fx:id="statusCol" editable="false" prefWidth="24.0" text="C1" />
+                      <TableColumn fx:id="avatarCol" editable="false" prefWidth="61.0" text="C2" />
+                        <TableColumn fx:id="nameCol" editable="false" prefWidth="185.0" text="C2" />
+                        <TableColumn fx:id="newMessColl" editable="false" prefWidth="30.0" text="C2" />
                     </columns>
                   </TableView>
                </children>

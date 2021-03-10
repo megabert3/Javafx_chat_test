@@ -3,6 +3,7 @@ package com.tassta.test.chat.controllers;
 import com.tassta.test.chat.model.User;
 import com.tassta.test.chat.model.implementation.UserListModelImp;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -69,22 +70,49 @@ public class JavafxChatController {
 
     private void userTableInit() {
 
+        //Установка статуса (онлайн/офлайн)
         statusCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<User, Boolean> param) {
 
-                User user = param.getValue();
-                return new SimpleBooleanProperty(user.isOnline());
+                return new SimpleBooleanProperty(param.getValue().isOnline());
             }
         });
-
-        //statusCol.setCellValueFactory(new PropertyValueFactory<>("online"));
 
         statusCol.setCellFactory(new Callback<TableColumn<User, Boolean>,
                 TableCell<User, Boolean>>() {
             @Override
             public TableCell<User, Boolean> call(TableColumn<User, Boolean> p) {
-                CheckBoxTableCell<User, Boolean> cell = new CheckBoxTableCell<User, Boolean>();
+                CheckBoxTableCell<User, Boolean> cell = new CheckBoxTableCell<>();
+                cell.setAlignment(Pos.CENTER);
+                return cell;
+            }
+        });
+
+        //Установка аватара
+        avatarCol.setCellValueFactory(c -> {
+            User user = c.getValue();
+            return new SimpleObjectProperty<>(new ImageView(user.getIcon()));
+        });
+
+        //Установка имени
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameCol.setStyle( "-fx-alignment: CENTER;");
+
+        //Установка статуса нового сообщения
+        newMessColl.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<User, Boolean> param) {
+
+                return new SimpleBooleanProperty(param.getValue());
+            }
+        });
+
+        newMessColl.setCellFactory(new Callback<TableColumn<User, Boolean>,
+                TableCell<User, Boolean>>() {
+            @Override
+            public TableCell<User, Boolean> call(TableColumn<User, Boolean> p) {
+                CheckBoxTableCell<User, Boolean> cell = new CheckBoxTableCell<>();
                 cell.setAlignment(Pos.CENTER);
                 return cell;
             }
