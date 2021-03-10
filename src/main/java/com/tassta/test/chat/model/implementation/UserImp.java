@@ -5,14 +5,17 @@ import javafx.scene.image.Image;
 
 public class UserImp implements User {
 
+    private static final String DEFAULT_IMAGE_PATH = "image/user_100px.png";
+
     private String name;
     private int id;
     private Image icon;
-    private boolean online;
+    private boolean online = true;
 
     public UserImp(String name, int id) {
         this.name = name;
         this.id = id;
+        this.icon = new Image(DEFAULT_IMAGE_PATH);
     }
 
     @Override

@@ -14,9 +14,15 @@ public class UserListModelImp implements UserListModel {
 
     private static UserListModelImp userListModelImp;
 
-    private UserListModelImp() {}
+    private UserListModelImp() {
+        //Test users
+        userList.add(new UserImp("ТестовыйФедот", 0));
+        userList.add(new UserImp("ТестовыйАркадий", 1));
+        userList.add(new UserImp("ТестовыйМихаил", 2));
+        userList.add(new UserImp("ТестовыйАлександр", 3));
+    }
 
-    public UserListModelImp getUserListModelImpInstance() {
+    public static UserListModelImp getUserListModelImpInstance() {
         if (userListModelImp == null) {
             userListModelImp = new UserListModelImp();
         }
@@ -27,5 +33,13 @@ public class UserListModelImp implements UserListModel {
     @Override
     public ObservableList<User> getUserList() {
         return FXCollections.observableList(userList);
+    }
+
+    public User getUser(User user) {
+        return userList.stream().findFirst().orElse(null);
+    }
+
+    public User getUser(int id) {
+        return userList.stream().filter(user -> user.getId() == id).findAny().orElse(null);
     }
 }

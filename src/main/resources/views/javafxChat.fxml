@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="602.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tassta.test.chat.controllers.JavafxChatController">
+<AnchorPane prefHeight="602.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tassta.test.chat.controllers.JavafxChatController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="150.0" layoutY="203.0" prefHeight="602.0" prefWidth="1017.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="150.0" layoutY="39.0" prefHeight="563.0" prefWidth="1017.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="150.0">
                <children>
-                  <TableView layoutX="22.0" layoutY="80.0" prefHeight="600.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="contactsTabView" layoutX="22.0" layoutY="80.0" prefHeight="600.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                        <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="statusCol" prefWidth="24.0" text="C1" />
+                      <TableColumn fx:id="avatarCol" prefWidth="61.0" text="C2" />
+                        <TableColumn fx:id="nameCol" prefWidth="185.0" text="C2" />
+                        <TableColumn fx:id="newMessColl" prefWidth="30.0" text="C2" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <SplitPane dividerPositions="0.8795986622073578" layoutX="179.0" layoutY="212.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.9177101967799642" layoutX="179.0" layoutY="212.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <GridPane layoutY="-10.0" prefHeight="69.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TextArea fx:id="sendMessHistort" editable="false" layoutX="154.0" layoutY="33.0" prefHeight="456.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0" />
+                              <Label fx:id="communicationWithUserName" layoutX="14.0" layoutY="6.0" text="Label" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="6.0" />
+                           </children></AnchorPane>
+                      <AnchorPane maxHeight="200.0" minHeight="0.0" minWidth="100.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <GridPane layoutY="-10.0" prefHeight="64.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="638.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.0" minWidth="10.0" prefWidth="70.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="638.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Button" GridPane.columnIndex="1" />
+                                    <TextArea fx:id="sendMessTxtAr" maxHeight="200.0" prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="sendMessBtn" mnemonicParsing="false" prefHeight="71.0" prefWidth="70.0" text="button" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
@@ -55,5 +60,18 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <GridPane layoutX="1.0" layoutY="6.0" prefHeight="30.0" prefWidth="239.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="6.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="37.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="202.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="authorizedUserNameLab" text="Label" GridPane.columnIndex="1" />
+            <ImageView fx:id="authorizedUserIconImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

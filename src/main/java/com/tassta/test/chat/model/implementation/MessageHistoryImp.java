@@ -2,6 +2,7 @@ package com.tassta.test.chat.model.implementation;
 
 import com.tassta.test.chat.model.Message;
 import com.tassta.test.chat.model.MessageHistory;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -13,6 +14,6 @@ public class MessageHistoryImp implements MessageHistory {
 
     @Override
     public ObservableList<Message> getMessageList() {
-        return null;
+        return FXCollections.observableList(messageList);
     }
 }
