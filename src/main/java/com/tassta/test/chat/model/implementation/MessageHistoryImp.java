@@ -16,8 +16,4 @@ public class MessageHistoryImp implements MessageHistory {
     public ObservableList<Message> getMessageList() {
         return messageObservableList;
     }
-
-    public void putMessInMessHistory(Message message) {
-        messageObservableList.add(message);
-    }
 }

@@ -6,11 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserListModelImp implements UserListModel {
 
-    private List<User> userList = new ArrayList<>();
+    private ObservableList<User> userList = FXCollections.observableList(new ArrayList<>());
 
     private static UserListModelImp userListModelImp;
 
@@ -32,7 +31,7 @@ public class UserListModelImp implements UserListModel {
 
     @Override
     public ObservableList<User> getUserList() {
-        return FXCollections.observableList(userList);
+        return userList;
     }
 
     public User getUser(User user) {

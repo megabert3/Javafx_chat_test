@@ -1,10 +1,18 @@
 package com.tassta.test.chat.controllers;
 
-import com.tassta.test.chat.model.User;
+import com.tassta.test.chat.model.*;
+import com.tassta.test.chat.model.implementation.MessageHistoryModelImpl;
+import com.tassta.test.chat.model.implementation.MessageImp;
 import com.tassta.test.chat.model.implementation.UserListModelImp;
+import com.tassta.test.chat.model.implementation.UserStateChangeHandlerImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -60,12 +68,15 @@ public class JavafxChatController {
     //User logged in with username and password
     private User authorizedUser;
 
+    //New mess from user
+    private Tooltip newMessTLTp = new Tooltip();
+
     @FXML
     void initialize() {
         //test login user
         authorizedUser = UserListModelImp.getUserListModelImpInstance().getUser(0);
-
         userTableInit();
+        initSendBtn();
     }
 
     private void userTableInit() {
@@ -99,25 +110,60 @@ public class JavafxChatController {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         nameCol.setStyle( "-fx-alignment: CENTER;");
 
-        //Установка статуса нового сообщения
-        newMessColl.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, Boolean>, ObservableValue<Boolean>>() {
+        //Установка действия при смене пользователя для общения
+        contactsTabView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<User, Boolean> param) {
+            public void changed(ObservableValue<? extends User> observableValue, User user, User newValue) {
+                if (newValue != null) {
+                    //Устанавливаю имя с кем общаюсь
+                    communicationWithUserName.setText(newValue.getName());
 
-                return new SimpleBooleanProperty(param.getValue());
-            }
-        });
+                    //Восстанавливаю историю сообщений
+                    MessageHistory messageHistory = MessageHistoryModelImpl.getMessageHistoryModelImplInstanse().getMessageHistory(newValue);
 
-        newMessColl.setCellFactory(new Callback<TableColumn<User, Boolean>,
-                TableCell<User, Boolean>>() {
-            @Override
-            public TableCell<User, Boolean> call(TableColumn<User, Boolean> p) {
-                CheckBoxTableCell<User, Boolean> cell = new CheckBoxTableCell<>();
-                cell.setAlignment(Pos.CENTER);
-                return cell;
+                    if (messageHistory != null) {
+                        StringBuilder stringBuilder = new StringBuilder();
+
+                        for (Message message : messageHistory.getMessageList()) {
+                            stringBuilder.append(parseMessInStrLineMess(message));
+                        }
+
+                        sendMessHistort.setText(stringBuilder.toString());
+                    }
+
+                    //По идее тут должно быть добавление нового объекта MessageHistory
+                } else {
+
+                }
             }
         });
 
         contactsTabView.setItems(UserListModelImp.getUserListModelImpInstance().getUserList());
+    }
+
+    //Действие при нажатии на кнопку отправить
+    private void initSendBtn() {
+        sendMessBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                User receiver = contactsTabView.getSelectionModel().getSelectedItem();
+
+                //Получаю истопию сообщений с выбранным пользователем
+                MessageHistory messageHistory = MessageHistoryModelImpl.getMessageHistoryModelImplInstanse().getMessageHistory(receiver);
+
+                Message message = new MessageImp(sendMessTxtAr.getText(), authorizedUser, receiver);
+                messageHistory.getMessageList().add(message);
+
+                sendMessHistort.appendText(parseMessInStrLineMess(message));
+                sendMessTxtAr.clear();
+            }
+        });
+    }
+
+    private String parseMessInStrLineMess(Message message) {
+        return message.getDate() + "  " +
+                message.getSender().getName() + ": " +
+                message.getText() + "\n";
     }
 }

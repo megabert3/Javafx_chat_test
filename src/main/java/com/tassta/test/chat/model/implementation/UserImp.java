@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 public class UserImp implements User {
 
     private static final String DEFAULT_IMAGE_PATH = "image/user_100px.png";
-    private MessageHistoryModelImpl messageHistoryModel = new MessageHistoryModelImpl();
 
     private String name;
     private int id;
@@ -19,15 +18,6 @@ public class UserImp implements User {
         this.name = name;
         this.id = id;
         this.icon = new Image(DEFAULT_IMAGE_PATH);
-    }
-
-    public MessageHistory getMessageHistoryWithUser(User user) {
-        return messageHistoryModel.getMessageHistory(user);
-    }
-
-    public void addMessageInHistoryWithUser(User user, Message message) {
-        MessageHistory messageHistory = getMessageHistoryWithUser(user);
-
     }
 
     @Override
